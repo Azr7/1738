@@ -9431,7 +9431,7 @@
 									"model": {
 										"$ref": "AAAAAAFQZ+1O3haF9fM="
 									},
-									"visible": false,
+									"visible": true,
 									"enabled": true,
 									"lineColor": "#000000",
 									"fillColor": "#ffffff",
@@ -9440,9 +9440,9 @@
 									"showShadow": true,
 									"containerChangeable": false,
 									"containerExtending": false,
-									"left": 734,
+									"left": 720,
 									"top": 471,
-									"width": 14.4599609375,
+									"width": 43.34814453125,
 									"height": 13,
 									"autoResize": false,
 									"alpha": -0.41092928643522897,
@@ -9452,7 +9452,7 @@
 									},
 									"edgePosition": 2,
 									"underline": false,
-									"text": "#e",
+									"text": "#MiTab",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5
 								},
@@ -11830,6 +11830,7 @@
 								"_parent": {
 									"$ref": "AAAAAAFQZ+1O3haE3/E="
 								},
+								"name": "MiTab",
 								"reference": {
 									"$ref": "AAAAAAFQFMsUysOjr64="
 								},
