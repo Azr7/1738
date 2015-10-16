@@ -1070,7 +1070,7 @@
 											"lineColor": "#000000",
 											"fillColor": "#ffffff",
 											"fontColor": "#000000",
-											"font": "Arial;13;1",
+											"font": "Arial;13;3",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -1080,7 +1080,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Enemigo*",
+											"text": "Enemigo",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -1379,7 +1379,7 @@
 											"lineColor": "#000000",
 											"fillColor": "#ffffff",
 											"fontColor": "#000000",
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -1389,7 +1389,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPuntaje(): int *",
+											"text": "+getPuntaje(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -1407,7 +1407,7 @@
 											"lineColor": "#000000",
 											"fillColor": "#ffffff",
 											"fontColor": "#000000",
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -1417,7 +1417,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Muere(): void *",
+											"text": "+Muere(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -1435,7 +1435,7 @@
 											"lineColor": "#000000",
 											"fillColor": "#ffffff",
 											"fontColor": "#000000",
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -1445,7 +1445,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Mover(): void *",
+											"text": "+Mover(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -4338,7 +4338,7 @@
 											"lineColor": "#000000",
 											"fillColor": "#ffffff",
 											"fontColor": "#000000",
-											"font": "Arial;13;1",
+											"font": "Arial;13;3",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -4348,7 +4348,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "PowerUp*",
+											"text": "PowerUp",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5
 										},
@@ -4535,7 +4535,7 @@
 											"lineColor": "#000000",
 											"fillColor": "#ffffff",
 											"fontColor": "#000000",
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -4545,7 +4545,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPuntaje(): int *",
+											"text": "+getPuntaje(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -4563,7 +4563,7 @@
 											"lineColor": "#000000",
 											"fillColor": "#ffffff",
 											"fontColor": "#000000",
-											"font": "Arial;13;0",
+											"font": "Arial;13;2",
 											"showShadow": true,
 											"containerChangeable": false,
 											"containerExtending": false,
@@ -4573,7 +4573,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Buff(Bomberman b): void *",
+											"text": "+Buff(Bomberman b): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										}
@@ -6367,7 +6367,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Casilla(x: int, y: int)",
+											"text": "+Casilla()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5
 										},
@@ -12516,7 +12516,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "Enemigo*",
+					"name": "Enemigo",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -12789,7 +12789,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "int *",
+									"type": "int",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -12798,7 +12798,7 @@
 							],
 							"concurrency": "sequential",
 							"isQuery": false,
-							"isAbstract": false
+							"isAbstract": true
 						},
 						{
 							"_type": "UMLOperation",
@@ -12820,7 +12820,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "void *",
+									"type": "void",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -12829,7 +12829,7 @@
 							],
 							"concurrency": "sequential",
 							"isQuery": false,
-							"isAbstract": false
+							"isAbstract": true
 						},
 						{
 							"_type": "UMLOperation",
@@ -12851,7 +12851,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "void *",
+									"type": "void",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -12860,10 +12860,10 @@
 							],
 							"concurrency": "sequential",
 							"isQuery": false,
-							"isAbstract": false
+							"isAbstract": true
 						}
 					],
-					"isAbstract": false,
+					"isAbstract": true,
 					"isFinalSpecialization": false,
 					"isLeaf": false,
 					"isActive": false
@@ -13797,7 +13797,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFF+qBWK6M3Z8Y="
 					},
-					"name": "PowerUp*",
+					"name": "PowerUp",
 					"ownedElements": [
 						{
 							"_type": "UMLAssociation",
@@ -13922,7 +13922,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "int *",
+									"type": "int",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -13931,7 +13931,7 @@
 							],
 							"concurrency": "sequential",
 							"isQuery": false,
-							"isAbstract": false
+							"isAbstract": true
 						},
 						{
 							"_type": "UMLOperation",
@@ -13969,7 +13969,7 @@
 									"visibility": "public",
 									"isStatic": false,
 									"isLeaf": false,
-									"type": "void *",
+									"type": "void",
 									"isReadOnly": false,
 									"isOrdered": false,
 									"isUnique": false,
@@ -13978,10 +13978,10 @@
 							],
 							"concurrency": "sequential",
 							"isQuery": false,
-							"isAbstract": false
+							"isAbstract": true
 						}
 					],
-					"isAbstract": false,
+					"isAbstract": true,
 					"isFinalSpecialization": false,
 					"isLeaf": false,
 					"isActive": false
@@ -14545,40 +14545,6 @@
 							"visibility": "public",
 							"isStatic": false,
 							"isLeaf": false,
-							"parameters": [
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFQFPzbstmWawE=",
-									"_parent": {
-										"$ref": "AAAAAAFQFPy/ztk1rcc="
-									},
-									"name": "x",
-									"visibility": "public",
-									"isStatic": false,
-									"isLeaf": false,
-									"type": "int",
-									"isReadOnly": false,
-									"isOrdered": false,
-									"isUnique": false,
-									"direction": "in"
-								},
-								{
-									"_type": "UMLParameter",
-									"_id": "AAAAAAFQFPzbtNmXCeI=",
-									"_parent": {
-										"$ref": "AAAAAAFQFPy/ztk1rcc="
-									},
-									"name": "y",
-									"visibility": "public",
-									"isStatic": false,
-									"isLeaf": false,
-									"type": "int",
-									"isReadOnly": false,
-									"isOrdered": false,
-									"isUnique": false,
-									"direction": "in"
-								}
-							],
 							"concurrency": "sequential",
 							"isQuery": false,
 							"isAbstract": false
