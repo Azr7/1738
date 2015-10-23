@@ -52,8 +52,8 @@ public class Tablero {
 
 		Matriz = new Casilla[31][31];
 		int porcentaje = 31*31;
-		Disponibles = new ArrayList<Casilla>();
-		Paredes = new ArrayList<Casilla>();
+		Disponibles = new ArrayList<Casilla>(); // Lugares donde se van a generar paredes
+		Paredes = new ArrayList<Casilla>(); // Paredes generadas
 
 		for(int i=0; i<31; i++)
 		{
@@ -84,40 +84,39 @@ public class Tablero {
 
 			}
 		}
+		// Se genera la matriz logica
+		
+		// se calcula el lugar que falta rellenar, se divide en 2, y esa cantidad es la que sera ocupada por rompibles
 		porcentaje = (31*31 - porcentaje) / 2; //50%
 		Random ran = new Random();
-		Random hayPowerUp = new Random();
-		Random Type = new Random();
-		int cantSpeedUp = 4;
-		int cantBombality = 3;
-		int cantFatality = 3;
-		int cantMasacrality = 1;
-		boolean LLeno = false;
 		int control = 0;
 		int iRandom;
 		while(control < porcentaje)
 		{
+			// Se generan las paredes rompibles y se agregan a la lista de paredes
 			iRandom = ran.nextInt(Disponibles.size());
-			Disponibles.get(iRandom).setPared(new Pared());
+			Disponibles.get(iRandom).setPared(new Pared()); // << Si esta instruccion se saca
 			Paredes.add(Disponibles.get(iRandom));
 			Disponibles.remove(iRandom);				
 			control++;
 		}
 
+		// Solamente se aplica un malo a todo el tablero. se debe repetir para todos los enemigos este procedimiento
 		int w = ran.nextInt(Disponibles.size()); 
 		Disponibles.get(w).setMalo(Rs1);
 		Rs1.setCelda(Disponibles.get(w));
 		Rs1.setTablero(this);
 		Disponibles.remove(w);
+		// ----------------------------------
 
 
-
+		// Se genera el bomberman, se relaciona al tablero, y se aplica a la matriz
 		MiB = new Bomberman();
 		Matriz[1][1].setBomber(MiB);
 		MiB.setCelda(Matriz[1][1]);
 		MiB.setTablero(this);
 
-
+		// Se inicializan los powerups
 		InicializarPowerUps();
 	}
 
@@ -126,6 +125,9 @@ public class Tablero {
 	 */
 	private void InicializarPowerUps()
 	{
+		// Tener en cuenta que los PowerUp's se generan bajo un rompible.
+		// al momento de iniciar el juego (o si se saca la instruccion de generar pared declarada arriba) ,
+		// no se verá ninguno, dado que desde GUI los PowerUps comienzan en la grafica como invisibles
 		Random ran = new Random();
 		int iRandom;		
 		for(int i=0; i<4; i++)

@@ -33,7 +33,7 @@ public class Rugulos extends Enemigo {
 		int nextX;
 		int nextY;
 
-
+		// Chequeamos si a partir de la pos actual, podemos movernos hacia donde nos marca dir
 		if(indice == 0) // Arriba
 		{
 			nextX = xActual;
@@ -107,7 +107,8 @@ public class Rugulos extends Enemigo {
 		int nextX = -1;
 		int nextY = -1;
 
-
+		// Este metodo se ejecuta, si puedeMover da true, por lo cual no va a haber problemas si cae en un lugar nulo de la matriz
+		// simplemente actualizamos los corrimientos
 		if(indice == 0) // Arriba
 		{
 			nextX = xActual;
@@ -129,6 +130,7 @@ public class Rugulos extends Enemigo {
 			nextY = yActual;
 		}
 		
+		// Como cambio de casilla, asignamos una nueva casilla al malo, y lo borramos de la anterior
 		MiCasilla.setMalo(null);
 		aux = Matriz[nextX][nextY];
 		aux.setMalo(this);

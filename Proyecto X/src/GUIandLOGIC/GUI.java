@@ -111,25 +111,29 @@ public class GUI extends javax.swing.JFrame {
 		GraphBomber = new BombermanGrafica();
 		LabelEnemies = new JLabel[6];
 		ETs = new EnemigoThread[6];
+		// iniciamos todo lo necesario utilizado en la gui.
+		
 
 		Bomberman BombermanAux = null;
 		int actualX = 0;
 		int actualY = 0;
-		int arg = 0;
-		int arg1 = 0;
+		int arg = 0; // arg de Threads de enemigos
+		int arg1 = 0; // arg de imagenes de enemigos
+		
+		// Hacemos un doble for, manejando la matriz logica para armar la grafica
 		for(int i=0; i<31 ; i++)
 		{
 			for(int j=0; j<31; j++)
 			{
 				Mapa[i][j] = new JLabel("");
-				if(Matriz[i][j] == null)
+				if(Matriz[i][j] == null) // Sabemos que si casilla es null, es irrompible
 				{
 					ImageIcon II = new ImageIcon("Images/solido.png");
 					Mapa[i][j].setIcon(II);
 				}
-				else if(Matriz[i][j].getPared() == null)
+				else if(Matriz[i][j].getPared() == null) // Si la casilla es NO NULA, puede o no tener pared
 				{
-					if(Matriz[i][j].getMalo() != null)
+					if(Matriz[i][j].getMalo() != null) // Si no tiene pared, puede contener un malo
 					{
 						EnemigoGrafica aux = Matriz[i][j].getMalo().getEnemyGraphics();
 						LabelEnemies[arg1] = aux.getEnemyLabel();
@@ -141,7 +145,7 @@ public class GUI extends javax.swing.JFrame {
 					}
 				}
 				else
-				{
+				{	// Si pared != null, entonces es un rompible, el cual puede o no tener powerup
 					ImageIcon II = new ImageIcon("Images/rompible.png");
 					Mapa[i][j].setIcon(II);
 					if(Matriz[i][j].getPowerUp() != null)
@@ -149,7 +153,7 @@ public class GUI extends javax.swing.JFrame {
 						JLabel PWGrafica = Matriz[i][j].getPowerUp().getGrafica().getPowerLabel();
 						contenedor.add(PWGrafica);
 						PWGrafica.setBounds(actualX,actualY,30,30);
-						PWGrafica.setVisible(false);
+						PWGrafica.setVisible(false); // <<< EL POWER UP COMIENZA COMO INVISIBLE HASTA QUE UNA PARED EXPLOTA
 					}
 				}
 				contenedor.add(Mapa[i][j]);
@@ -160,6 +164,10 @@ public class GUI extends javax.swing.JFrame {
 			actualY = 0;
 
 		}
+		// Anteriormente tomamos en cuenta la iniciativa de hacer que el bomberman y los powerups, sean imagenes que no
+		// están en el tablero, sino por encima. Pero al usar setbounds los colocamos en los lugares correctos.
+		
+		// Grafica de bomberman, thread, imagen, y demas se inicializan y relacionan aqui
 		JLabel JBomberman = GraphBomber.getBomberLabel();
 		JBomberman.setBounds(1*MovPix,1*MovPix, 30, 30);
 		Matriz[1][1].getBomber().setBomberGrafica(GraphBomber);
@@ -169,6 +177,7 @@ public class GUI extends javax.swing.JFrame {
 		GraphBomber.setBT(BT);
 		GraphBomber.setGUI(this);
 
+		// Thread y grafica de la bomba, se inicializa y relacionan
 		BMBT = new BombaThread(MiLogica,this);
 		BombaGrafica Bgg = MiLogica.getBombermanTablero().getBomba().getBombaGrafica();
 		Bgg.setBombThread(BMBT);
@@ -220,6 +229,8 @@ public class GUI extends javax.swing.JFrame {
 	 *
 	 */
 	private class CortarThreads implements WindowListener{
+		// Queriamos cortar con los threads activos una vez que se cierra el juego.
+		// Con los del bomberman y los malos, se cortarían al momento del game over
 		public void windowClosing(java.awt.event.WindowEvent arg0) {
 			BMBT.destroy();
 			setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

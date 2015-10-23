@@ -91,7 +91,7 @@ public class Bomberman {
 		int nextX;
 		int nextY;
 
-
+		// Simplemente se fija si se puede realizar el movimiento solicitado
 		if(indice == 0) // Arriba
 		{
 			nextX = xActual;
@@ -167,7 +167,7 @@ public class Bomberman {
 	 */
 	public void mover(int dir){
 		switch (dir){
-
+		// A partir de la direccion recibida, se chequea a donde se quiere mover, y nos fijamos si es posible
 		case KeyEvent.VK_UP : //Arriba
 			if(puedeMover(0))
 			{
@@ -212,7 +212,7 @@ public class Bomberman {
 		int nextX = -1;
 		int nextY = -1;
 
-
+		// Si entra en este metodo, es porque "puedeMover" es verdadero, entonces se hacen los corrimientos
 		if(indice == 0) // Arriba
 		{
 			nextX = xActual;
@@ -233,10 +233,12 @@ public class Bomberman {
 			nextX = xActual + 1;
 			nextY = yActual;
 		}
+		// Al movernos de casilla, tenemos que setear una nueva, y terminar la relacion con la anterior
 		MiCasilla.setBomber(null);
 		aux = Matriz[nextX][nextY];
 		aux.setBomber(this);
 		MiCasilla = aux;
+		// Si la casilla nueva tiene un powerup, entonces lo agarramos. Enviamos mensaje al PowerUp
 		if(MiCasilla.getPowerUp() != null)
 		{
 			MiCasilla.getPowerUp().Buff(this);
@@ -264,6 +266,7 @@ public class Bomberman {
 	 * Muerte logica y graficamente del bomberman, ademas de su thread controlador
 	 */
 	public void Muere() {
+		// Efecto grafico, gameover, y corte del thread
 		Dead = true;
 		BG.getBT().getGUI().BombermanMuere();
 		BG.muereGrafico();
@@ -333,6 +336,11 @@ public class Bomberman {
 		int yActual = MiBomba.getBombaGrafica().getLabelBomba().getY() / MovPix;
 
 		ArrayList<Integer> aEliminar = new ArrayList<Integer>();
+		
+		
+		// Se controla los lugares donde debe explotar la bomba,
+		// A su vez, si abajo de un rompible explotado, existia un powerup, entonces este se hace visible.
+		
 		// Control arriba.
 		for(int i=0; i<=radio; i++)
 		{
@@ -420,12 +428,15 @@ public class Bomberman {
 			}
 		}
 
-
+		// Metodo aux que hace el efecto del fuego en las coordenadas donde la bomba explota
 		MiBomba.getBombaGrafica().recibirCoordenadasFuego(aEliminar);
 
 		int xBomber = MiCasilla.getX();
 		int yBomber = MiCasilla.getY();
 
+		// Aca controlamos si el bomberman estaba en la zona de explosion
+		// De ser verdadero, bomberman muere
+		
 		for(int i=0; i<4; i++)
 		{
 			for(int j=0; j<=radio; j++)
