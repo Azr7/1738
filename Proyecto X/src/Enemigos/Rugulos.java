@@ -15,8 +15,8 @@ public class Rugulos extends Enemigo {
 	 * Constructor, inicializa el enemigo con 15 de puntaje y 1 de velocidad
 	 */
 	public Rugulos() {
-		super(15,1);
-		super.EnemyGraphics = new RugulosGrafica(1);
+		super(15,90); // 90 es velocidad del timer del sleep
+		super.EnemyGraphics = new RugulosGrafica(90);
 	}
 
 	public int getPuntaje() {

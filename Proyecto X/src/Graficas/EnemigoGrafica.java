@@ -75,43 +75,43 @@ public abstract class EnemigoGrafica{
 	 */
 	public void movimientoGrafico(int indice)
 	{
-		int velo = MovPix / velocidad;
+		
 		try {
 			if(indice == 0) //arriba
 			{	
-				for(int i=0,arg =0; i<velo; i++, arg = (arg+1)%3) // Con arg no me caigo del arreglo de imagenes.
+				for(int i=0,arg =0; i<MovPix; i++, arg = (arg+1)%3) // Con arg no me caigo del arreglo de imagenes.
 				{
-					EnemigoLabel.setLocation(EnemigoLabel.getX(),EnemigoLabel.getY() - velocidad);
+					EnemigoLabel.setLocation(EnemigoLabel.getX(),EnemigoLabel.getY() - 1);
 					EnemigoLabel.setIcon(EnemigoArriba[arg]);
-					EThread.sleep(90);
+					EThread.sleep(velocidad);
 				}
 			}
 
 			else if(indice == 1) //abajo
 			{
-				for(int i=0,arg =0; i<velo; i++, arg = (arg+1)%3) // Con arg no me caigo del arreglo de imagenes.
+				for(int i=0,arg =0; i<MovPix; i++, arg = (arg+1)%3) // Con arg no me caigo del arreglo de imagenes.
 				{
-					EnemigoLabel.setLocation(EnemigoLabel.getX(),EnemigoLabel.getY() + velocidad);
+					EnemigoLabel.setLocation(EnemigoLabel.getX(),EnemigoLabel.getY() + 1);
 					EnemigoLabel.setIcon(EnemigoAbajo[arg]);
-					EThread.sleep(90);
+					EThread.sleep(velocidad);
 				}
 			}
 			else if(indice == 2) //izq
 			{
-				for(int i=0,arg =0; i<velo; i++, arg = (arg+1)%3) // Con arg no me caigo del arreglo de imagenes.
+				for(int i=0,arg =0; i<MovPix; i++, arg = (arg+1)%3) // Con arg no me caigo del arreglo de imagenes.
 				{
-					EnemigoLabel.setLocation(EnemigoLabel.getX() - velocidad,EnemigoLabel.getY());
+					EnemigoLabel.setLocation(EnemigoLabel.getX() - 1,EnemigoLabel.getY());
 					EnemigoLabel.setIcon(EnemigoIzquierda[arg]);
-					EThread.sleep(90);
+					EThread.sleep(velocidad);
 				}
 			}
 			else if(indice == 3) //der
 			{		
-				for(int i=0,arg =0; i<velo; i++, arg = (arg+1)%3) // Con arg no me caigo del arreglo de imagenes.
+				for(int i=0,arg =0; i<MovPix; i++, arg = (arg+1)%3) // Con arg no me caigo del arreglo de imagenes.
 				{
-					EnemigoLabel.setLocation(EnemigoLabel.getX() + velocidad,EnemigoLabel.getY());
+					EnemigoLabel.setLocation(EnemigoLabel.getX() + 1,EnemigoLabel.getY());
 					EnemigoLabel.setIcon(EnemigoDerecha[arg]);
-					EThread.sleep(90);
+					EThread.sleep(velocidad);
 				}
 			}
 		} catch (InterruptedException e) {

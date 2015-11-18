@@ -31,6 +31,11 @@ public class Casilla {
 	 * Enteros i,j que marcan la posicion x,y de la casilla
 	 */
 	protected int i,j;
+	/**
+	 * puntaje de las paredes
+	 */
+	protected int puntajePared = 10;
+
 
 	// Si casilla es nula, es Indestruible.
 	// Sino, si pared NO es nula -> Es destruible
@@ -152,5 +157,7 @@ public class Casilla {
 	 * @return y pos
 	 */
 	public int getY(){return j;}
+	
+	public int getPuntaje(){return puntajePared;}
 
 }

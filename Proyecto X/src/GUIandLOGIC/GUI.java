@@ -1,5 +1,6 @@
 package GUIandLOGIC;
 import Graficas.*;
+import Reloj.*;
 import Timers.*;
 import Mapa.*;
 
@@ -79,7 +80,27 @@ public class GUI extends javax.swing.JFrame {
 	 * Aux booleano para determinar si esta muerto o no el bomberman
 	 */
 	protected boolean noMuerto = true;	
+	/**
+	 * arg de Threads e imagenes de enemigos
+	 */
+	protected int arg = 0;
 
+	/**
+	 * Datos del juego, info, score y tiempo, en imagen base.
+	 */
+	protected JLabel datos;
+	/**
+	 * score
+	 */
+	protected JLabel score;
+	/**
+	 * reloj
+	 */
+	protected JLabel reloj;
+	/**
+	 * timer reloj
+	 */
+	protected RelojThread RT;
 
 	/**
 	 * Crea la grafica del juego
@@ -111,15 +132,29 @@ public class GUI extends javax.swing.JFrame {
 		GraphBomber = new BombermanGrafica();
 		LabelEnemies = new JLabel[6];
 		ETs = new EnemigoThread[6];
-		// iniciamos todo lo necesario utilizado en la gui.
 		
+		
+		datos = new JLabel();		
+		datos.setIcon(new ImageIcon("Images/Datos.png"));
+		contenedor.add(datos);
+		datos.setBounds(510,16,500,500);
+		
+		score = new JLabel("0");
+		contenedor.add(score);
+		score.setBounds(630,95,100,15);
+		
+		RT = new RelojThread(this);
+		reloj = new JLabel("0 min : 0 seg");
+		contenedor.add(reloj);
+		reloj.setBounds(600,48,100,15);
+		// iniciamos todo lo necesario utilizado en la gui.
+
 
 		Bomberman BombermanAux = null;
 		int actualX = 0;
 		int actualY = 0;
-		int arg = 0; // arg de Threads de enemigos
-		int arg1 = 0; // arg de imagenes de enemigos
-		
+
+
 		// Hacemos un doble for, manejando la matriz logica para armar la grafica
 		for(int i=0; i<31 ; i++)
 		{
@@ -136,12 +171,11 @@ public class GUI extends javax.swing.JFrame {
 					if(Matriz[i][j].getMalo() != null) // Si no tiene pared, puede contener un malo
 					{
 						EnemigoGrafica aux = Matriz[i][j].getMalo().getEnemyGraphics();
-						LabelEnemies[arg1] = aux.getEnemyLabel();
-						contenedor.add(LabelEnemies[0]);
-						LabelEnemies[arg1].setBounds(actualX,actualY,30,30);
+						LabelEnemies[arg] = aux.getEnemyLabel();
+						contenedor.add(LabelEnemies[arg]);
+						LabelEnemies[arg].setBounds(actualX,actualY,30,30);						
 						ETs[arg] = new EnemigoThread(aux,Matriz[i][j].getMalo());
-						arg++;
-						arg1++;
+						arg++;						
 					}
 				}
 				else
@@ -166,7 +200,7 @@ public class GUI extends javax.swing.JFrame {
 		}
 		// Anteriormente tomamos en cuenta la iniciativa de hacer que el bomberman y los powerups, sean imagenes que no
 		// están en el tablero, sino por encima. Pero al usar setbounds los colocamos en los lugares correctos.
-		
+
 		// Grafica de bomberman, thread, imagen, y demas se inicializan y relacionan aqui
 		JLabel JBomberman = GraphBomber.getBomberLabel();
 		JBomberman.setBounds(1*MovPix,1*MovPix, 30, 30);
@@ -211,12 +245,18 @@ public class GUI extends javax.swing.JFrame {
 				});
 				BT.start();
 				BMBT.start();
-				ETs[0].start(); // << Aca arrancan todos los hilos enemigos.
+				RT.start();
+				for(int i=0; i<arg; i++)
+				{
+					ETs[i].start(); // << Aca arrancan todos los hilos enemigos.
+					
+				}
 			}
 			setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
 			this.addWindowListener(new CortarThreads());
 			pack();
-			this.setSize(525, 545);
+			this.setSize(720, 535);
+			this.setResizable(false);
 		} catch (Exception e) {
 			//add your error handling code here
 			e.printStackTrace();
@@ -233,6 +273,7 @@ public class GUI extends javax.swing.JFrame {
 		// Con los del bomberman y los malos, se cortarían al momento del game over
 		public void windowClosing(java.awt.event.WindowEvent arg0) {
 			BMBT.destroy();
+			RT.toggleStop();
 			setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		}
 		public void windowActivated(java.awt.event.WindowEvent arg0){}
@@ -331,5 +372,23 @@ public class GUI extends javax.swing.JFrame {
 	public JLabel[][] getMatrizLabel()
 	{
 		return Mapa;
+	}
+	/**
+	 * aumenta el score del juego
+	 * @param n entero
+	 */
+	public void aumentarScore(int n)
+	{
+		Puntaje = Puntaje + n;
+		score.setText("" + Puntaje);
+	}
+	/**
+	 * acomoda el reloj con el tiempo actual
+	 */
+	public void modClock()
+	{
+		int S = RT.getS();
+		int M = RT.getM();
+		reloj.setText(M + " min : " + S + " seg");
 	}
 }

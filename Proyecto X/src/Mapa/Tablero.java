@@ -47,9 +47,6 @@ public class Tablero {
 		Enemigos = new Enemigo[6];
 		MiLogica = null;
 
-		Rugulos Rs1 = new Rugulos(); // Faltan los demas enemigos
-
-
 		Matriz = new Casilla[31][31];
 		int porcentaje = 31*31;
 		Disponibles = new ArrayList<Casilla>(); // Lugares donde se van a generar paredes
@@ -85,7 +82,7 @@ public class Tablero {
 			}
 		}
 		// Se genera la matriz logica
-		
+
 		// se calcula el lugar que falta rellenar, se divide en 2, y esa cantidad es la que sera ocupada por rompibles
 		porcentaje = (31*31 - porcentaje) / 2; //50%
 		Random ran = new Random();
@@ -102,13 +99,36 @@ public class Tablero {
 		}
 
 		// Solamente se aplica un malo a todo el tablero. se debe repetir para todos los enemigos este procedimiento
-		int w = ran.nextInt(Disponibles.size()); 
-		Disponibles.get(w).setMalo(Rs1);
-		Rs1.setCelda(Disponibles.get(w));
-		Rs1.setTablero(this);
+		int w;
+		for(int i=0; i<2; i++)
+		{
+			w = ran.nextInt(Disponibles.size());
+			Rugulos RS = new Rugulos();
+			Disponibles.get(w).setMalo(RS);
+			RS.setCelda(Disponibles.get(w));
+			RS.setTablero(this);
+			Disponibles.remove(w);
+		}
+		// ----------------------------------
+		
+		for(int i=0; i<3; i++)
+		{
+			w = ran.nextInt(Disponibles.size());
+			Altair AR = new Altair();
+			Disponibles.get(w).setMalo(AR);
+			AR.setCelda(Disponibles.get(w));
+			AR.setTablero(this);
+			Disponibles.remove(w);
+		}
+		// ----------------------------------
+		w = ran.nextInt(Disponibles.size());
+		Sirius SS = new Sirius();
+		Disponibles.get(w).setMalo(SS);
+		SS.setCelda(Disponibles.get(w));
+		SS.setTablero(this);
 		Disponibles.remove(w);
 		// ----------------------------------
-
+		
 
 		// Se genera el bomberman, se relaciona al tablero, y se aplica a la matriz
 		MiB = new Bomberman();

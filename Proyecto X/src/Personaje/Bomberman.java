@@ -242,6 +242,7 @@ public class Bomberman {
 		if(MiCasilla.getPowerUp() != null)
 		{
 			MiCasilla.getPowerUp().Buff(this);
+			MiTab.getLogic().getGUI().aumentarScore(MiCasilla.getPowerUp().getPuntaje());
 			MiCasilla.setPowerUp(null);
 		}
 	}
@@ -334,6 +335,7 @@ public class Bomberman {
 		Casilla[][] Matriz = MiTab.getMatriz();
 		int xActual = MiBomba.getBombaGrafica().getLabelBomba().getX() / MovPix;
 		int yActual = MiBomba.getBombaGrafica().getLabelBomba().getY() / MovPix;
+		int aRomper = 0;
 
 		ArrayList<Integer> aEliminar = new ArrayList<Integer>();
 		
@@ -353,6 +355,7 @@ public class Bomberman {
 					if(Matriz[xActual][yActual - i].getPared() != null)
 					{
 						Matriz[xActual][yActual - i].setPared(null);// Rompe
+						aRomper++;
 						if(Matriz[xActual][yActual - i].getPowerUp() != null)
 							Matriz[xActual][yActual - i].getPowerUp().getGrafica().visible();
 					}
@@ -375,6 +378,7 @@ public class Bomberman {
 
 					{
 						Matriz[xActual][yActual + i].setPared(null); // Rompe
+						aRomper++;
 						if(Matriz[xActual][yActual + i].getPowerUp() != null)
 							Matriz[xActual][yActual + i].getPowerUp().getGrafica().visible();
 					}
@@ -397,6 +401,7 @@ public class Bomberman {
 
 					{
 						Matriz[xActual - i][yActual].setPared(null); // Rompe
+						aRomper++;
 						if(Matriz[xActual - i][yActual].getPowerUp() != null)
 							Matriz[xActual - i][yActual].getPowerUp().getGrafica().visible();
 					}
@@ -418,6 +423,7 @@ public class Bomberman {
 					if(Matriz[xActual + i][yActual].getPared() != null)
 					{
 						Matriz[xActual  + i][yActual].setPared(null); // Rompe
+						aRomper++;
 						if(Matriz[xActual + i][yActual].getPowerUp() != null)
 							Matriz[xActual + i][yActual].getPowerUp().getGrafica().visible();
 					}
@@ -427,6 +433,10 @@ public class Bomberman {
 
 			}
 		}
+		
+		// Calcula el puntaje por romper paredes y lo modifica
+		int addPuntaje = aRomper * MiCasilla.getPuntaje();
+		MiTab.getLogic().getGUI().aumentarScore(addPuntaje);
 
 		// Metodo aux que hace el efecto del fuego en las coordenadas donde la bomba explota
 		MiBomba.getBombaGrafica().recibirCoordenadasFuego(aEliminar);
