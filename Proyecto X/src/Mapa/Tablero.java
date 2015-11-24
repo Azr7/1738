@@ -38,11 +38,16 @@ public class Tablero {
 	 * ArrayList de casillas CON PARED
 	 */
 	protected ArrayList<Casilla> Paredes;
+	/**
+	 * Objetivos del juego
+	 */
+	protected int Objetivos;
 
 	/**
 	 * Crea un nuevo tablero e inicializa la matriz de movimientos
 	 */
 	public Tablero() {
+		Objetivos = 0;
 		MiB = null;
 		Enemigos = new Enemigo[6];
 		MiLogica = null;
@@ -96,11 +101,12 @@ public class Tablero {
 			Paredes.add(Disponibles.get(iRandom));
 			Disponibles.remove(iRandom);				
 			control++;
+			Objetivos++;
 		}
-
+		
 		// Solamente se aplica un malo a todo el tablero. se debe repetir para todos los enemigos este procedimiento
 		int w;
-		for(int i=0; i<2; i++)
+		for(int i=0; i<3; i++)
 		{
 			w = ran.nextInt(Disponibles.size());
 			Rugulos RS = new Rugulos();
@@ -108,10 +114,11 @@ public class Tablero {
 			RS.setCelda(Disponibles.get(w));
 			RS.setTablero(this);
 			Disponibles.remove(w);
+			Objetivos++;
 		}
 		// ----------------------------------
 		
-		for(int i=0; i<3; i++)
+		for(int i=0; i<2; i++)
 		{
 			w = ran.nextInt(Disponibles.size());
 			Altair AR = new Altair();
@@ -119,6 +126,7 @@ public class Tablero {
 			AR.setCelda(Disponibles.get(w));
 			AR.setTablero(this);
 			Disponibles.remove(w);
+			Objetivos++;
 		}
 		// ----------------------------------
 		w = ran.nextInt(Disponibles.size());
@@ -127,6 +135,7 @@ public class Tablero {
 		SS.setCelda(Disponibles.get(w));
 		SS.setTablero(this);
 		Disponibles.remove(w);
+		Objetivos++;
 		// ----------------------------------
 		
 
@@ -138,6 +147,7 @@ public class Tablero {
 
 		// Se inicializan los powerups
 		InicializarPowerUps();
+		
 	}
 
 	/**
@@ -212,5 +222,11 @@ public class Tablero {
 	{
 		return MiB;
 	}
+	
+	/**
+	 * cantidad de objetivos del juego (a romper)
+	 * @return int cantidad
+	 */
+	public int getCantidadObjetivos(){return Objetivos;}
 
 }

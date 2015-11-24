@@ -1,5 +1,6 @@
 package PowerUps;
 import Personaje.*;
+import Reloj.RelojMasacrality;
 import Graficas.*;
 
 import java.util.*;
@@ -34,6 +35,7 @@ public class Masacrality extends PowerUp {
 	public void Buff(Bomberman b) {
 		System.out.println("AGARRO EL MASACRA");
 		super.GPU.getPowerLabel().setIcon(null);
+		b.Masacrality();
 	}
 
 }

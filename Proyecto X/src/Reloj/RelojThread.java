@@ -11,6 +11,7 @@ public class RelojThread extends Thread{
 	{
 		lazoGUI = g;
 		MiReloj = new Reloj();
+		start();
 	}
 	
 		public void run()

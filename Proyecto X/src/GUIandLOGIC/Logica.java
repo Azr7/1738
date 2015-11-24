@@ -35,22 +35,7 @@ public class Logica {
 	public void InicializarTablero() {
 		MiTab = new Tablero();
 		setTablero(MiTab);
-		MiTab.setLogica(this);
-	}
-
-	/**
-	 * 
-	 */
-	public void TerminarJuego() {
-
-	}
-
-	/**
-	 * 
-	 * @param i
-	 */
-	public void addPoints(int i) {
-
+		MiTab.setLogica(this);		
 	}
 
 	/**
@@ -67,7 +52,7 @@ public class Logica {
 	 */
 	public void setGUI(GUI g)
 	{
-		GUI = g;
+		GUI = g;		
 	}
 	/**
 	 * setea el tablero asociado a la logica

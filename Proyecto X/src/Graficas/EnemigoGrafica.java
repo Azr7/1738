@@ -50,7 +50,10 @@ public abstract class EnemigoGrafica{
 	 * Thread a cargo de controlar los timers del enemigo
 	 */
 	protected EnemigoThread EThread;
-
+	/**
+	 * 
+	 */
+	protected int indice;
 	/**
 	 * Crea la grafica asociada a un tipo de enemigo
 	 * @param v velocidad int
@@ -142,19 +145,21 @@ public abstract class EnemigoGrafica{
 	 * - Nota : Todavia no está probado -
 	 */
 	public void muereGrafico()
-	{	EThread.setpMover(false);
+	{			
 		EThread.toggleDeath();
-		for(int i=0; i<5; i++)
-		{
-			try {
-				EnemigoLabel.setIcon(EnemigoMuere[i]);
-				EThread.sleep(20);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}		
-		EnemigoLabel.setIcon(null);
-		EThread.destroy();
+	}
+	/**
+	 * 
+	 * @param i
+	 */
+	public void setIndice(int i){
+		indice = i;
+	}
+	/**
+	 * 
+	 * @return
+	 */
+	public int getIndice(){
+		return indice;
 	}
 }

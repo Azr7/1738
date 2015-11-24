@@ -45,6 +45,10 @@ public abstract class Enemigo {
 	 * Graficas del enemigo
 	 */
 	protected EnemigoGrafica EnemyGraphics;	
+	/**
+	 * 
+	 */
+	protected volatile boolean vive = true;
 
 	/**
 	 * constructor de clase enemigo
@@ -113,7 +117,17 @@ public abstract class Enemigo {
 	/**
 	 * Muerte del enemigo
 	 */
-	public abstract void Muere();
+	public void Muere() 
+	{
+		MiTab.getLogic().getGUI().setTotal(MiTab.getLogic().getGUI().getTotal()-1);
+		MiTab.getLogic().getGUI().aumentarScore(P);
+		toggleVivo();
+		EnemyGraphics.muereGrafico();
+		if(MiTab.getLogic().getGUI().getTotal() == 0)
+		{
+			MiTab.getLogic().getGUI().Win();
+		}
+	}
 
 	/**
 	 * Realiza un movimiento en la direccion especificada
@@ -127,6 +141,17 @@ public abstract class Enemigo {
 	 * @return boolean verdadero o falso
 	 */
 	public abstract boolean puedeMover(int indice);
+	
+	/**
+	 * 
+	 */
+	public void toggleVivo(){ vive = !vive;}
+	
+	/**
+	 * 
+	 * @return
+	 */
+	public boolean isAlive(){return vive;}
 
 
 }

@@ -32,69 +32,69 @@ public class Rugulos extends Enemigo {
 		int yActual = MiCasilla.getY();
 		int nextX;
 		int nextY;
-
-		// Chequeamos si a partir de la pos actual, podemos movernos hacia donde nos marca dir
-		if(indice == 0) // Arriba
-		{
-			nextX = xActual;
-			nextY = yActual - 1;
-			if(nextY > 0)
+		if(vive){
+			// Chequeamos si a partir de la pos actual, podemos movernos hacia donde nos marca dir
+			if(indice == 0) // Arriba
 			{
-				if(Matriz[nextX][nextY] != null)
+				nextX = xActual;
+				nextY = yActual - 1;
+				if(nextY > 0)
 				{
-					if(Matriz[nextX][nextY].getPared() == null)
+					if(Matriz[nextX][nextY] != null)
 					{
-						return true;
+						if(Matriz[nextX][nextY].getPared() == null && !Matriz[nextX][nextY].hayBomba())
+						{
+							return true;
+						}
+					}
+				}
+			}
+			else if(indice == 1) // Abajo
+			{
+				nextX = xActual;
+				nextY = yActual + 1;
+				if(nextY < Alto)
+				{
+					if(Matriz[nextX][nextY] != null)
+					{
+						if(Matriz[nextX][nextY].getPared() == null && !Matriz[nextX][nextY].hayBomba())
+						{
+							return true;
+						}
+					}
+				}
+			}
+			else if(indice == 2) // Izq
+			{
+				nextX = xActual - 1;
+				nextY = yActual;
+				if(nextX > 0)
+				{
+					if(Matriz[nextX][nextY] != null)
+					{
+						if(Matriz[nextX][nextY].getPared() == null && !Matriz[nextX][nextY].hayBomba())
+						{
+							return true;
+						}
+					}
+				}
+			}
+			else if(indice == 3) // Der
+			{
+				nextX = xActual + 1;
+				nextY = yActual;
+				if(nextX < Ancho)
+				{
+					if(Matriz[nextX][nextY] != null)
+					{
+						if(Matriz[nextX][nextY].getPared() == null && !Matriz[nextX][nextY].hayBomba())
+						{
+							return true;
+						}
 					}
 				}
 			}
 		}
-		else if(indice == 1) // Abajo
-		{
-			nextX = xActual;
-			nextY = yActual + 1;
-			if(nextY < Alto)
-			{
-				if(Matriz[nextX][nextY] != null)
-				{
-					if(Matriz[nextX][nextY].getPared() == null)
-					{
-						return true;
-					}
-				}
-			}
-		}
-		else if(indice == 2) // Izq
-		{
-			nextX = xActual - 1;
-			nextY = yActual;
-			if(nextX > 0)
-			{
-				if(Matriz[nextX][nextY] != null)
-				{
-					if(Matriz[nextX][nextY].getPared() == null)
-					{
-						return true;
-					}
-				}
-			}
-		}
-		else if(indice == 3) // Der
-		{
-			nextX = xActual + 1;
-			nextY = yActual;
-			if(nextX < Ancho)
-			{
-				if(Matriz[nextX][nextY] != null)
-				{
-					if(Matriz[nextX][nextY].getPared() == null)
-					{
-						return true;
-					}
-				}
-			}
-		}
-
 		return false;
 	}
 
@@ -129,7 +129,7 @@ public class Rugulos extends Enemigo {
 			nextX = xActual + 1;
 			nextY = yActual;
 		}
-		
+
 		// Como cambio de casilla, asignamos una nueva casilla al malo, y lo borramos de la anterior
 		MiCasilla.setMalo(null);
 		aux = Matriz[nextX][nextY];
@@ -138,11 +138,5 @@ public class Rugulos extends Enemigo {
 	}
 
 
-
-
-	public void Muere()
-	{
-		
-	}
 
 }

@@ -56,7 +56,7 @@ public class Altair extends Enemigo {
 			nextX = xActual + 1;
 			nextY = yActual;
 		}
-		
+
 		// Como cambio de casilla, asignamos una nueva casilla al malo, y lo borramos de la anterior
 		MiCasilla.setMalo(null);
 		aux = Matriz[nextX][nextY];
@@ -71,69 +71,62 @@ public class Altair extends Enemigo {
 		int yActual = MiCasilla.getY();
 		int nextX;
 		int nextY;
+		if(vive){
+			// Chequeamos si a partir de la pos actual, podemos movernos hacia donde nos marca dir
+			if(indice == 0) // Arriba
+			{
+				nextX = xActual;
+				nextY = yActual - 1;
+				if(nextY > 0)
+				{
+					if(Matriz[nextX][nextY] != null && !Matriz[nextX][nextY].hayBomba())
+					{	
+						return true;
 
-		// Chequeamos si a partir de la pos actual, podemos movernos hacia donde nos marca dir
-		if(indice == 0) // Arriba
-		{
-			nextX = xActual;
-			nextY = yActual - 1;
-			if(nextY > 0)
-			{
-				if(Matriz[nextX][nextY] != null)
-				{	
-					return true;
-					
+					}
 				}
 			}
-		}
-		else if(indice == 1) // Abajo
-		{
-			nextX = xActual;
-			nextY = yActual + 1;
-			if(nextY < Alto)
+			else if(indice == 1) // Abajo
 			{
-				if(Matriz[nextX][nextY] != null)
+				nextX = xActual;
+				nextY = yActual + 1;
+				if(nextY < Alto)
 				{
-					return true;
+					if(Matriz[nextX][nextY] != null && !Matriz[nextX][nextY].hayBomba())
+					{
+						return true;
+					}
 				}
 			}
-		}
-		else if(indice == 2) // Izq
-		{
-			nextX = xActual - 1;
-			nextY = yActual;
-			if(nextX > 0)
+			else if(indice == 2) // Izq
 			{
-				if(Matriz[nextX][nextY] != null)
+				nextX = xActual - 1;
+				nextY = yActual;
+				if(nextX > 0)
 				{
-					return true;
-					
-				}
-			}
-		}
-		else if(indice == 3) // Der
-		{
-			nextX = xActual + 1;
-			nextY = yActual;
-			if(nextX < Ancho)
-			{
-				if(Matriz[nextX][nextY] != null)
-				{
-					return true;
-					
-				}
-			}
-		}
+					if(Matriz[nextX][nextY] != null && !Matriz[nextX][nextY].hayBomba())
+					{
+						return true;
 
+					}
+				}
+			}
+			else if(indice == 3) // Der
+			{
+				nextX = xActual + 1;
+				nextY = yActual;
+				if(nextX < Ancho)
+				{
+					if(Matriz[nextX][nextY] != null && !Matriz[nextX][nextY].hayBomba())
+					{
+						return true;
+
+					}
+				}
+			}		
+		}
 		return false;
 	}
-
-
-	public void Muere()
-	{
-
-	}
-
 
 
 

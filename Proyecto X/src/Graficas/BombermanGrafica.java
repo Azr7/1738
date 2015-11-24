@@ -223,6 +223,7 @@ public class BombermanGrafica{
 			}
 		}
 		BomberLabel.setIcon(null);
+		miGUI.BombermanMuere();
 	}
 
 }

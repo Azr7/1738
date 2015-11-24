@@ -35,6 +35,10 @@ public class Casilla {
 	 * puntaje de las paredes
 	 */
 	protected int puntajePared = 10;
+	/**
+	 * informa si hay bomba
+	 */
+	protected boolean hayBomba;
 
 
 	// Si casilla es nula, es Indestruible.
@@ -52,6 +56,7 @@ public class Casilla {
 		MiPowerUp = null;
 		i = x;
 		j = y;
+		hayBomba = false;
 	}
 
 	/**
@@ -159,5 +164,8 @@ public class Casilla {
 	public int getY(){return j;}
 	
 	public int getPuntaje(){return puntajePared;}
+	
+	public boolean hayBomba(){return hayBomba;}
+	public void toggleBomba(){hayBomba = !hayBomba;}
 
 }

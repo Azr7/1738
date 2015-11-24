@@ -27,12 +27,8 @@ public class EnemigoThread extends Thread{
 	/**
 	 * boolean puedeMover, el cual controla si puede o no moverse
 	 */
-	protected boolean pM;
-	/**
-	 * boolean que controla si aun existe el enemigo
-	 */
-	protected boolean muerto = false;
-
+	protected volatile boolean pM = true;
+	
 	/**
 	 * crea un nuevo hilo para un enemigo
 	 * @param eg EnemigoGrafica
@@ -42,17 +38,17 @@ public class EnemigoThread extends Thread{
 	{
 		EG = eg;
 		Ene = ene;
-		pM = true;
 		EG.setEnemigoThread(this);
+		start();
 	}
 
 
 	public void run()
 	{
-		while(pMover())
+		while(pM && Ene.isAlive()) // Puede Mover
 		{
 			int x = ran.nextInt(4);
-			if(Ene.puedeMover(x) && !muerto)
+			if(Ene.puedeMover(x))
 			{			
 				EG.movimientoGrafico(x);
 				Ene.Mover(x);
@@ -60,39 +56,16 @@ public class EnemigoThread extends Thread{
 		}
 	}
 
-	/**
-	 * consulta que determina si el enemigo puede moverse o no
-	 * @return boolean v o f
-	 */
-	public boolean pMover()
-	{
-		return pM;
-	}
-
-	/**
-	 * setea si el enemigo se puede o no mover
-	 * @param b boolean
-	 */
-	public void setpMover(boolean b)
-	{
-		pM = b;
-	}
-
-	/**
-	 * detiene el hilo
-	 */
-	public void destroy()
-	{
-		this.interrupt();
-		pM = false;
-	}
-
+	
 	/**
 	 * mata al enemigo
 	 */
 	public void toggleDeath()
 	{
-		muerto = !muerto;
+		this.stop();
+		pM = false;
+		Ene.getCelda().setMalo(null);
+		Ene.getTablero().getLogic().getGUI().quitarEnemigo(EG.getIndice());
 	}
 }
 

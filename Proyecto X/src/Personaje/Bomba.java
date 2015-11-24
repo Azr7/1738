@@ -25,14 +25,14 @@ public class Bomba {
 	/**
 	 * boolean para controlar si se puede o no colocar otra bomba
 	 */
-	protected boolean noExp = true;
+	
 
 	/**
 	 * Crea una nueva bomba
 	 */
-	public Bomba() {
-		longitud = 1;
-		MiB = null;
+	public Bomba(int l , Bomberman bb) {
+		longitud = l;
+		MiB = bb;
 		BMBGrafica = new BombaGrafica(this);
 	}
 
@@ -70,17 +70,6 @@ public class Bomba {
 		longitud = i;
 	}
  
-	/**
-	 * Detona la bomba
-	 */
-	public void Explotar() {
-		if(noExploto())
-		{
-			noExp = !noExp;
-			BMBGrafica.colocarBombaGrafica(MiB.getCelda().getX(), MiB.getCelda().getY());
-			
-		}
-	}
 	
 	/**
 	 * setea el bomberman asociado a esta bomba
@@ -91,21 +80,4 @@ public class Bomba {
 		MiB = b;
 	}
 	
-	/**
-	 * boolean que controla si la bomba exploto
-	 * @return boolean verdadero o falso
-	 */
-	public boolean noExploto()
-	{
-		return noExp;
-	}
-	
-	/**
-	 * cambia el boolean de control de explosiones
-	 */
-	public void toggle()
-	{
-		noExp = !noExp;
-	}
-
 }

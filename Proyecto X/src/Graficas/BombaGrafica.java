@@ -21,10 +21,7 @@ public class BombaGrafica {
 	 * Imagen de la bomba
 	 */
 	protected JLabel Bomba;
-	/**
-	 * Animacion de la bomba
-	 */
-	protected Icon Bombas[];
+
 	/**
 	 * Thread que controla los timers de la bomba
 	 */
@@ -44,24 +41,11 @@ public class BombaGrafica {
 	 */
 	public BombaGrafica(Bomba b)
 	{
-		Bombas = new ImageIcon[11];
-
-		Bombas[0] = new ImageIcon("Images/bomba1.png");
-		Bombas[1] = new ImageIcon("Images/bomba2.png");
-		Bombas[2] = new ImageIcon("Images/bomba3.png");
-		Bombas[3] = new ImageIcon("Images/bomba1.png");
-		Bombas[4] = new ImageIcon("Images/bomba2.png");
-		Bombas[5] = new ImageIcon("Images/bomba3.png");
-		Bombas[6] = new ImageIcon("Images/bomba1.png");
-		Bombas[7] = new ImageIcon("Images/bomba2.png");
-		Bombas[8] = new ImageIcon("Images/bomba3.png");
-		Bombas[9] = new ImageIcon("Images/bomba1.png");
-		Bombas[10] = new ImageIcon("Images/bomba2.png");
-
 		Bomba = new JLabel();
 
 		B = b;
-
+		
+		BMBThread = new BombaThread(B.getBomberman().getTablero().getLogic(),B.getBomberman().getTablero().getLogic().getGUI(),B,this);
 	}
 
 	/**
@@ -89,24 +73,21 @@ public class BombaGrafica {
 	 */
 	public void colocarBombaGrafica(int x, int y)
 	{
-		try {
+		
 			Casilla[][] Matriz = B.getBomberman().getTablero().getMatriz();
-			Matriz[x][y].setPared(new Pared());
+			Matriz[x][y] = null;
+			B.getBomberman().getTablero().getLogic().getGUI().add(Bomba);
 			Bomba.setBounds(x*MovPix,y*MovPix,30,30);
-			Bomba.setIcon(Bombas[0]);
 			Bomba.setVisible(true);
-			for(int i=0; i<11; i++)
-			{
-				BMBThread.sleep(300);
-				Bomba.setIcon(Bombas[i]);
-			}			
-			Bomba.setVisible(false);
-			Matriz[x][y].setPared(null);
-			B.toggle();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+			Bomba.setIcon(new ImageIcon("Images/bomba1.png"));	
+	}
+	
+	public void colocarBombaGrafica2(int x,int y)
+	{
+		Casilla[][] Matriz = B.getBomberman().getTablero().getMatriz();
+		Bomba.setVisible(false);
+		Matriz[x][y] = new Casilla(x,y);
+		Matriz[x][y].setPared(null);
 	}
 
 	/**
@@ -160,6 +141,10 @@ public class BombaGrafica {
 				MatrizLabels[x][y].setIcon(null);
 			}
 
+			if(B.getBomberman().getTablero().getLogic().getGUI().getTotal() == 0)
+			{
+				B.getBomberman().getTablero().getLogic().getGUI().Win();
+			}
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

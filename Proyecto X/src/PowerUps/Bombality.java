@@ -33,6 +33,7 @@ public class Bombality extends PowerUp {
 	public void Buff(Bomberman b) {
 		System.out.println("AGARRO EL BOMBALITY");
 		super.GPU.getPowerLabel().setIcon(null);
+		b.Bombality();
 	}
 
 }

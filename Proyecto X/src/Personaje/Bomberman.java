@@ -1,6 +1,7 @@
 package Personaje;
 import Graficas.*;
 import Mapa.*;
+import Reloj.RelojMasacrality;
 
 import java.awt.event.KeyEvent;
 import java.util.*;
@@ -15,22 +16,22 @@ import javax.swing.JLabel;
  */
 public class Bomberman {
 
+
+	protected boolean MasacralityActivo;
 	/**
 	 * cantidad de bombas que puede colocar en simultaneo
 	 */
-	protected int CantBomba;
+	protected int cantidad;
 	/**
 	 * referencia al tablero
 	 */
 	protected Tablero MiTab;
+
+	protected int radio;
 	/**
 	 * referencia a la casilla donde el bomberman esta parado
 	 */
 	protected Casilla MiCasilla;
-	/**
-	 * referencia a su bomba
-	 */
-	protected Bomba MiBomba;
 	/**
 	 * ancho del tablero
 	 */
@@ -51,32 +52,19 @@ public class Bomberman {
 	 * tamaño de la casilla en pixeles (es cuadrada)
 	 */
 	protected int MovPix = 16;
-	/**
-	 * boolean que controla si puede o no traspasar las paredes rompibles
-	 */
-	protected boolean traspasa;
 
 	/**
 	 * crea un nuevo bomberman
 	 */
 	public Bomberman() {
-		CantBomba = 1;
+		cantidad = 1;
+		radio = 1;
 		MiTab = null;
 		MiCasilla = null;
 		Dead = false;
-		MiBomba = new Bomba();
-		MiBomba.setBomberman(this);
-		traspasa = false;
+		MasacralityActivo = false;		
 	}
 
-	/**
-	 * Retorna la bomba del bomberman
-	 * @return bomba B
-	 */
-	public Bomba getBomba()
-	{
-		return MiBomba;
-	}
 
 	/**
 	 * consulta que retorna verdadero si el bomberman puede moverse en la direccion recibida
@@ -90,73 +78,73 @@ public class Bomberman {
 		int yActual = MiCasilla.getY();
 		int nextX;
 		int nextY;
-
-		// Simplemente se fija si se puede realizar el movimiento solicitado
-		if(indice == 0) // Arriba
-		{
-			nextX = xActual;
-			nextY = yActual - 1;
-			if(nextY > 0)
+		if(!Dead){
+			// Simplemente se fija si se puede realizar el movimiento solicitado
+			if(indice == 0) // Arriba
 			{
-				if(Matriz[nextX][nextY] != null)
+				nextX = xActual;
+				nextY = yActual - 1;
+				if(nextY > 0)
 				{
-					if(Matriz[nextX][nextY].getPared() == null)
+					if(Matriz[nextX][nextY] != null)
 					{
-						return true;
+						if(Matriz[nextX][nextY].getPared() == null)
+						{
+							return true;
+						}
+						else if(MasacralityActivo) return true;
 					}
-					else if(traspasa) return true;
+				}
+			}
+			else if(indice == 1) // Abajo
+			{
+				nextX = xActual;
+				nextY = yActual + 1;
+				if(nextY < Alto)
+				{
+					if(Matriz[nextX][nextY] != null)
+					{
+						if(Matriz[nextX][nextY].getPared() == null)
+						{
+							return true;
+						}
+						else if(MasacralityActivo) return true;
+					}
+				}
+			}
+			else if(indice == 2) // Izq
+			{
+				nextX = xActual - 1;
+				nextY = yActual;
+				if(nextX > 0)
+				{
+					if(Matriz[nextX][nextY] != null)
+					{
+						if(Matriz[nextX][nextY].getPared() == null)
+						{
+							return true;
+						}
+						else if(MasacralityActivo) return true;
+					}
+				}
+			}
+			else if(indice == 3) // Der
+			{
+				nextX = xActual + 1;
+				nextY = yActual;
+				if(nextX < Ancho)
+				{
+					if(Matriz[nextX][nextY] != null)
+					{
+						if(Matriz[nextX][nextY].getPared() == null)
+						{
+							return true;
+						}
+						else if(MasacralityActivo) return true;
+					}
 				}
 			}
 		}
-		else if(indice == 1) // Abajo
-		{
-			nextX = xActual;
-			nextY = yActual + 1;
-			if(nextY < Alto)
-			{
-				if(Matriz[nextX][nextY] != null)
-				{
-					if(Matriz[nextX][nextY].getPared() == null)
-					{
-						return true;
-					}
-					else if(traspasa) return true;
-				}
-			}
-		}
-		else if(indice == 2) // Izq
-		{
-			nextX = xActual - 1;
-			nextY = yActual;
-			if(nextX > 0)
-			{
-				if(Matriz[nextX][nextY] != null)
-				{
-					if(Matriz[nextX][nextY].getPared() == null)
-					{
-						return true;
-					}
-					else if(traspasa) return true;
-				}
-			}
-		}
-		else if(indice == 3) // Der
-		{
-			nextX = xActual + 1;
-			nextY = yActual;
-			if(nextX < Ancho)
-			{
-				if(Matriz[nextX][nextY] != null)
-				{
-					if(Matriz[nextX][nextY].getPared() == null)
-					{
-						return true;
-					}
-					else if(traspasa) return true;
-				}
-			}
-		}
-
 		return false;
 	}
 
@@ -245,6 +233,10 @@ public class Bomberman {
 			MiTab.getLogic().getGUI().aumentarScore(MiCasilla.getPowerUp().getPuntaje());
 			MiCasilla.setPowerUp(null);
 		}
+		if(MiCasilla.getMalo() != null)
+		{
+			Muere();
+		}
 	}
 
 	/**
@@ -268,18 +260,25 @@ public class Bomberman {
 	 */
 	public void Muere() {
 		// Efecto grafico, gameover, y corte del thread
-		Dead = true;
-		BG.getBT().getGUI().BombermanMuere();
-		BG.muereGrafico();
-		BG.getBT().destroy();
+		if(!MasacralityActivo)
+		{
+			Dead = true;
+			BG.muereGrafico();
+			BG.getBT().destro();
+		}
 	}
 
 	/**
 	 * Buff del masacrality
-	 * - Nota : Falta completar -
+	 * 
 	 */
 	public void Masacrality() {
-
+		MasacralityActivo = true;
+		RelojMasacrality RM = new RelojMasacrality(this);
+	}
+	public void desMasacrear()
+	{
+		MasacralityActivo = false;
 	}
 
 	/**
@@ -287,8 +286,7 @@ public class Bomberman {
 	 * - Nota : Falta completar -
 	 */
 	public void Bombality() {
-
-
+		cantidad++;
 	}
 
 	/**
@@ -296,7 +294,7 @@ public class Bomberman {
 	 * 
 	 */
 	public void Fatality() {
-		MiBomba.setLong(MiBomba.getLong()*2);
+		radio = radio*2;
 	}
 
 	/**
@@ -319,30 +317,93 @@ public class Bomberman {
 	 * - NOTA : Falta hacer controles en caso de que se consiga un bombality - 
 	 */
 	public void colocarBomba() {
-		if(MiBomba.noExploto())
-		{	
-			MiBomba.Explotar();
-			explotarBombaAux();
+		if((!Dead && cantidad>0) || MasacralityActivo){
+			cantidad--;
+			Bomba Aux = new Bomba(radio,this);			
 		}
+	}
+
+	public void incBombas()
+	{
+		cantidad++;
 	}
 
 	/**
 	 * Metodo auxiliar para la explosion de bomba
 	 * Donde se realizan las destrucciones y graficas de explosion
 	 */
-	private void explotarBombaAux(){
+	public boolean explotarBombaAux(Bomba MiBomba,ArrayList<Integer> aEliminar){
 		int radio = MiBomba.getLong();
 		Casilla[][] Matriz = MiTab.getMatriz();
 		int xActual = MiBomba.getBombaGrafica().getLabelBomba().getX() / MovPix;
 		int yActual = MiBomba.getBombaGrafica().getLabelBomba().getY() / MovPix;
 		int aRomper = 0;
+		boolean muere = false;
 
-		ArrayList<Integer> aEliminar = new ArrayList<Integer>();
-		
-		
+		// Aca controlamos si el bomberman estaba en la zona de explosion
+		// De ser verdadero, bomberman muere
+
+		int xBomber = MiCasilla.getX();
+		int yBomber = MiCasilla.getY();	
+		for(int i=0; i<4; i++)
+		{
+			for(int j=0; j<=radio; j++)
+			{
+				if(i == 0) // Arriba.
+				{
+					if(Matriz[xActual][yActual - j] == null) break;
+					if(xActual == xBomber && yActual - j == yBomber) 
+					{ 
+						if(!MasacralityActivo){
+							Dead = true;
+							muere = true;
+						}
+						break;
+					}
+				}
+				else if(i == 1) // Abajo.
+				{
+					if(Matriz[xActual][yActual + j] == null) break;
+					if(xActual == xBomber && yActual + j == yBomber) 
+					{ 
+						if(!MasacralityActivo){
+							Dead = true;
+							muere = true;
+						}
+						break;
+					}
+				}
+				else if(i == 2) // Izq
+				{
+					if(Matriz[xActual - j][yActual] == null) break;
+					if(xActual - j  == xBomber && yActual == yBomber) 
+					{ 
+						if(!MasacralityActivo){
+							Dead = true;
+							muere = true;
+						}
+						break;
+					}
+				}
+				else if(i == 3) // Der
+				{
+					if(Matriz[xActual + j][yActual] == null) break;
+					if(xActual + j  == xBomber && yActual == yBomber) 
+					{ 
+						if(!MasacralityActivo){
+							Dead = true;
+							muere = true;
+						}
+						break;
+					}
+				}
+			}
+		}
+
+
 		// Se controla los lugares donde debe explotar la bomba,
 		// A su vez, si abajo de un rompible explotado, existia un powerup, entonces este se hace visible.
-		
+
 		// Control arriba.
 		for(int i=0; i<=radio; i++)
 		{
@@ -354,10 +415,15 @@ public class Bomberman {
 				{	
 					if(Matriz[xActual][yActual - i].getPared() != null)
 					{
+						MiTab.getLogic().getGUI().setTotal(MiTab.getLogic().getGUI().getTotal()-1);
 						Matriz[xActual][yActual - i].setPared(null);// Rompe
 						aRomper++;
 						if(Matriz[xActual][yActual - i].getPowerUp() != null)
 							Matriz[xActual][yActual - i].getPowerUp().getGrafica().visible();
+					}
+					else if(Matriz[xActual][yActual - i].getMalo() != null)
+					{
+						Matriz[xActual][yActual - i].getMalo().Muere();
 					}
 				}
 				aEliminar.add(xActual);
@@ -377,10 +443,15 @@ public class Bomberman {
 					if(Matriz[xActual][yActual + i].getPared() != null)
 
 					{
+						MiTab.getLogic().getGUI().setTotal(MiTab.getLogic().getGUI().getTotal()-1);
 						Matriz[xActual][yActual + i].setPared(null); // Rompe
 						aRomper++;
 						if(Matriz[xActual][yActual + i].getPowerUp() != null)
 							Matriz[xActual][yActual + i].getPowerUp().getGrafica().visible();
+					}
+					else if(Matriz[xActual][yActual + i].getMalo() != null)
+					{
+						Matriz[xActual][yActual + i].getMalo().Muere();
 					}
 				}
 				aEliminar.add(xActual);
@@ -400,10 +471,15 @@ public class Bomberman {
 					if(Matriz[xActual - i][yActual].getPared() != null)
 
 					{
+						MiTab.getLogic().getGUI().setTotal(MiTab.getLogic().getGUI().getTotal()-1);
 						Matriz[xActual - i][yActual].setPared(null); // Rompe
 						aRomper++;
 						if(Matriz[xActual - i][yActual].getPowerUp() != null)
 							Matriz[xActual - i][yActual].getPowerUp().getGrafica().visible();
+					}
+					else if(Matriz[xActual - i][yActual].getMalo() != null)
+					{
+						Matriz[xActual - i][yActual].getMalo().Muere();
 					}
 				}
 				aEliminar.add(xActual - i);
@@ -422,10 +498,15 @@ public class Bomberman {
 				{
 					if(Matriz[xActual + i][yActual].getPared() != null)
 					{
+						MiTab.getLogic().getGUI().setTotal(MiTab.getLogic().getGUI().getTotal()-1);
 						Matriz[xActual  + i][yActual].setPared(null); // Rompe
 						aRomper++;
 						if(Matriz[xActual + i][yActual].getPowerUp() != null)
 							Matriz[xActual + i][yActual].getPowerUp().getGrafica().visible();
+					}
+					else if(Matriz[xActual + i][yActual].getMalo() != null)
+					{
+						Matriz[xActual + i][yActual].getMalo().Muere();
 					}
 				}
 				aEliminar.add(xActual + i);
@@ -433,62 +514,12 @@ public class Bomberman {
 
 			}
 		}
-		
+
 		// Calcula el puntaje por romper paredes y lo modifica
 		int addPuntaje = aRomper * MiCasilla.getPuntaje();
 		MiTab.getLogic().getGUI().aumentarScore(addPuntaje);
 
-		// Metodo aux que hace el efecto del fuego en las coordenadas donde la bomba explota
-		MiBomba.getBombaGrafica().recibirCoordenadasFuego(aEliminar);
-
-		int xBomber = MiCasilla.getX();
-		int yBomber = MiCasilla.getY();
-
-		// Aca controlamos si el bomberman estaba en la zona de explosion
-		// De ser verdadero, bomberman muere
-		
-		for(int i=0; i<4; i++)
-		{
-			for(int j=0; j<=radio; j++)
-			{
-				if(i == 0) // Arriba.
-				{
-					if(Matriz[xActual][yActual - j] == null) break;
-					if(xActual == xBomber && yActual - j == yBomber) 
-					{ 
-						Muere();
-						break;
-					}
-				}
-				else if(i == 1) // Abajo.
-				{
-					if(Matriz[xActual][yActual + j] == null) break;
-					if(xActual == xBomber && yActual + j == yBomber) 
-					{ 
-						Muere();
-						break;
-					}
-				}
-				else if(i == 2) // Izq
-				{
-					if(Matriz[xActual - j][yActual] == null) break;
-					if(xActual - j  == xBomber && yActual == yBomber) 
-					{ 
-						Muere();
-						break;
-					}
-				}
-				else if(i == 3) // Der
-				{
-					if(Matriz[xActual + j][yActual] == null) break;
-					if(xActual + j  == xBomber && yActual == yBomber) 
-					{ 
-						Muere();
-						break;
-					}
-				}
-			}
-		}
+		return muere;		
 	}
 
 	/**

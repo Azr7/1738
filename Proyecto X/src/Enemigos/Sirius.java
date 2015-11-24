@@ -31,7 +31,7 @@ public class Sirius extends Enemigo {
 	{
 		int xB = MiTab.getBomber().getCelda().getX();
 		int yB = MiTab.getBomber().getCelda().getY();
-	
+
 		int difOldX = Math.abs(xr - xB);
 		int difOldY = Math.abs(yr - yB);
 		if(indice == 0)
@@ -58,7 +58,7 @@ public class Sirius extends Enemigo {
 
 		int difNewX = Math.abs(xr - xB);
 		int difNewY = Math.abs(yr - yB);
-		
+
 		return (difNewX < difOldX || difNewY < difOldY);
 	}
 
@@ -69,72 +69,72 @@ public class Sirius extends Enemigo {
 		int yActual = MiCasilla.getY();
 		int nextX;
 		int nextY;
-
-		if(Minimo(xActual, yActual, indice))
-		{
-			// Chequeamos si a partir de la pos actual, podemos movernos hacia donde nos marca dir
-			if(indice == 0) // Arriba
+		if(vive){
+			if(Minimo(xActual, yActual, indice))
 			{
-				nextX = xActual;
-				nextY = yActual - 1;
-				if(nextY > 0)
+				// Chequeamos si a partir de la pos actual, podemos movernos hacia donde nos marca dir
+				if(indice == 0) // Arriba
 				{
-					if(Matriz[nextX][nextY] != null)
+					nextX = xActual;
+					nextY = yActual - 1;
+					if(nextY > 0)
 					{
-						if(Matriz[nextX][nextY].getPared() == null)
+						if(Matriz[nextX][nextY] != null)
 						{
-							return true;
+							if(Matriz[nextX][nextY].getPared() == null && !Matriz[nextX][nextY].hayBomba())
+							{
+								return true;
+							}
 						}
 					}
 				}
-			}
-			else if(indice == 1) // Abajo
-			{
-				nextX = xActual;
-				nextY = yActual + 1;
-				if(nextY < Alto)
+				else if(indice == 1) // Abajo
 				{
-					if(Matriz[nextX][nextY] != null)
+					nextX = xActual;
+					nextY = yActual + 1;
+					if(nextY < Alto)
 					{
-						if(Matriz[nextX][nextY].getPared() == null)
+						if(Matriz[nextX][nextY] != null)
 						{
-							return true;
+							if(Matriz[nextX][nextY].getPared() == null && !Matriz[nextX][nextY].hayBomba())
+							{
+								return true;
+							}
 						}
 					}
 				}
-			}
-			else if(indice == 2) // Izq
-			{
-				nextX = xActual - 1;
-				nextY = yActual;
-				if(nextX > 0)
+				else if(indice == 2) // Izq
 				{
-					if(Matriz[nextX][nextY] != null)
+					nextX = xActual - 1;
+					nextY = yActual;
+					if(nextX > 0)
 					{
-						if(Matriz[nextX][nextY].getPared() == null)
+						if(Matriz[nextX][nextY] != null)
 						{
-							return true;
+							if(Matriz[nextX][nextY].getPared() == null && !Matriz[nextX][nextY].hayBomba())
+							{
+								return true;
+							}
 						}
 					}
 				}
-			}
-			else if(indice == 3) // Der
-			{
-				nextX = xActual + 1;
-				nextY = yActual;
-				if(nextX < Ancho)
+				else if(indice == 3) // Der
 				{
-					if(Matriz[nextX][nextY] != null)
+					nextX = xActual + 1;
+					nextY = yActual;
+					if(nextX < Ancho)
 					{
-						if(Matriz[nextX][nextY].getPared() == null)
+						if(Matriz[nextX][nextY] != null)
 						{
-							return true;
+							if(Matriz[nextX][nextY].getPared() == null && !Matriz[nextX][nextY].hayBomba())
+							{
+								return true;
+							}
 						}
 					}
 				}
 			}
 		}
-
 		return false;
 	}
 
@@ -177,11 +177,5 @@ public class Sirius extends Enemigo {
 		MiCasilla = aux;
 	}
 
-
-
-
-	public void Muere() {
-
-	}
 
 }

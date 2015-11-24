@@ -12,10 +12,11 @@ import java.awt.event.WindowListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 import Personaje.*;
-
+import MAIN.*;
 /**
  * 
  * Clase GUI, implementando la interfaz grafica
@@ -60,18 +61,12 @@ public class GUI extends javax.swing.JFrame {
 	 * Aux booleano usado en los movs de teclado
 	 */
 	protected boolean lock = false;
-	/**
-	 * Aux booleano usado en la colocacion de bomba
-	 */
-	protected boolean lockBomba = false;	
+
 	/**
 	 * Thread del bomberman
 	 */
 	protected BombermanThread BT;
-	/**
-	 * Thread de la bomba
-	 */
-	protected BombaThread BMBT;
+
 	/**
 	 * Thread de los enemigos (uno por cada uno)
 	 */
@@ -101,12 +96,26 @@ public class GUI extends javax.swing.JFrame {
 	 * timer reloj
 	 */
 	protected RelojThread RT;
+	/**
+	 * segundos
+	 */
+	protected int S;
+	/**
+	 * minutos
+	 */
+	protected int M;
+	/**
+	 * puntaje total
+	 */
+	protected int ObjetosDestruibles;
+	
 
 	/**
 	 * Crea la grafica del juego
 	 */
 	public GUI() {
 		super();
+		ObjetosDestruibles = 0;
 		Iniciar();
 		initGUI();
 	}
@@ -132,17 +141,17 @@ public class GUI extends javax.swing.JFrame {
 		GraphBomber = new BombermanGrafica();
 		LabelEnemies = new JLabel[6];
 		ETs = new EnemigoThread[6];
-		
-		
+		setTotal(MiLogica.getTablero().getCantidadObjetivos());		
+
 		datos = new JLabel();		
 		datos.setIcon(new ImageIcon("Images/Datos.png"));
 		contenedor.add(datos);
 		datos.setBounds(510,16,500,500);
-		
+
 		score = new JLabel("0");
 		contenedor.add(score);
 		score.setBounds(630,95,100,15);
-		
+
 		RT = new RelojThread(this);
 		reloj = new JLabel("0 min : 0 seg");
 		contenedor.add(reloj);
@@ -172,8 +181,9 @@ public class GUI extends javax.swing.JFrame {
 					{
 						EnemigoGrafica aux = Matriz[i][j].getMalo().getEnemyGraphics();
 						LabelEnemies[arg] = aux.getEnemyLabel();
-						contenedor.add(LabelEnemies[arg]);
-						LabelEnemies[arg].setBounds(actualX,actualY,30,30);						
+						aux.setIndice(arg);
+						contenedor.add(LabelEnemies[arg],0);
+						LabelEnemies[arg].setBounds(actualX,actualY,30,30);			
 						ETs[arg] = new EnemigoThread(aux,Matriz[i][j].getMalo());
 						arg++;						
 					}
@@ -206,16 +216,11 @@ public class GUI extends javax.swing.JFrame {
 		JBomberman.setBounds(1*MovPix,1*MovPix, 30, 30);
 		Matriz[1][1].getBomber().setBomberGrafica(GraphBomber);
 		BombermanAux = Matriz[1][1].getBomber();
-		contenedor.add(JBomberman);
+		contenedor.add(JBomberman,0);
 		BT = new BombermanThread(BombermanAux,MiLogica,this);
 		GraphBomber.setBT(BT);
 		GraphBomber.setGUI(this);
 
-		// Thread y grafica de la bomba, se inicializa y relacionan
-		BMBT = new BombaThread(MiLogica,this);
-		BombaGrafica Bgg = MiLogica.getBombermanTablero().getBomba().getBombaGrafica();
-		Bgg.setBombThread(BMBT);
-		contenedor.add(Bgg.getLabelBomba());
 
 	}
 
@@ -231,26 +236,19 @@ public class GUI extends javax.swing.JFrame {
 					public void keyPressed(KeyEvent i) {
 						if(noMuerto)
 						{
-							if(i.getKeyCode() == KeyEvent.VK_SPACE) colocar(i);
+							if(i.getKeyCode() == KeyEvent.VK_SPACE) MiLogica.getBombermanTablero().colocarBomba();
 							else mover(i);
 						}
 					}
 					public void keyTyped(KeyEvent i) {
 						if(noMuerto)
 						{
-							if(i.getKeyCode() == KeyEvent.VK_SPACE) colocar(i);
+							if(i.getKeyCode() == KeyEvent.VK_SPACE) MiLogica.getBombermanTablero().colocarBomba();
 							else mover(i);
 						}
 					}
 				});
-				BT.start();
-				BMBT.start();
-				RT.start();
-				for(int i=0; i<arg; i++)
-				{
-					ETs[i].start(); // << Aca arrancan todos los hilos enemigos.
-					
-				}
+
 			}
 			setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
 			this.addWindowListener(new CortarThreads());
@@ -272,7 +270,6 @@ public class GUI extends javax.swing.JFrame {
 		// Queriamos cortar con los threads activos una vez que se cierra el juego.
 		// Con los del bomberman y los malos, se cortarían al momento del game over
 		public void windowClosing(java.awt.event.WindowEvent arg0) {
-			BMBT.destroy();
 			RT.toggleStop();
 			setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		}
@@ -284,16 +281,6 @@ public class GUI extends javax.swing.JFrame {
 		public void windowOpened(java.awt.event.WindowEvent arg0) {}
 	}
 
-
-	/**
-	 * Metodo aux utilizado para saber si se requiere la colocacion de una bomba, luego bloquea.
-	 * @param k evento de teclado
-	 */
-	public void colocar(KeyEvent k){
-		if(!lockBomba){
-			lockBomba = true;
-		}
-	}
 
 	/**
 	 * Metodo aux utilizado para saber si el usuario desea mover al personaje principal, luego bloquea mas acciones.
@@ -315,13 +302,6 @@ public class GUI extends javax.swing.JFrame {
 		lock = !lock;
 	}
 
-	/**
-	 * Desbloquea la activacion de bombas
-	 */
-	public void toggleBomba()
-	{
-		lockBomba = !lockBomba;
-	}
 
 	/**
 	 * Devuelve la direccion hacia donde el usuario se quiere desplazar con el personaje principal
@@ -330,14 +310,6 @@ public class GUI extends javax.swing.JFrame {
 	public int getDireccion()
 	{
 		return direccion;
-	}
-	/**
-	 * Consulta , para saber si se está colocando o no una bomba.
-	 * @return boolean verdadero o falso
-	 */
-	public boolean isLockedBomba()
-	{
-		return lockBomba == false;
 	}
 
 	/**
@@ -362,7 +334,12 @@ public class GUI extends javax.swing.JFrame {
 	 */
 	private void GameOver()
 	{
-
+		RT.toggleStop();
+		int seleccion = JOptionPane.showOptionDialog( null,"Usted ha perdido. Consiguió "+Puntaje+" puntos \nen "+M+" minutos y "+S+" segundos.",
+				"Game Over !",JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE,null,// null para icono por defecto.
+				new Object[] { "Cerrar"},"");
+		System.exit(0);		
 	}
 
 	/**
@@ -387,8 +364,53 @@ public class GUI extends javax.swing.JFrame {
 	 */
 	public void modClock()
 	{
-		int S = RT.getS();
-		int M = RT.getM();
+		S = RT.getS();
+		M = RT.getM();
 		reloj.setText(M + " min : " + S + " seg");
+	}
+	/**
+	 * borra un label enemigo
+	 * @param i
+	 */
+	public void quitarEnemigo(int i)
+	{
+		LabelEnemies[i].setIcon(null);
+	}
+	/**
+	 * setea el puntaje total antes de comenzar el juego
+	 * @param x puntaje
+	 */
+	public void setTotal(int x)
+	{
+		ObjetosDestruibles = x;
+	}
+	/**
+	 * retorna el puntaje total
+	 * @return puntaje entero total
+	 */
+	public int getTotal()
+	{
+		return ObjetosDestruibles;
+	}
+	/**
+	 * retorna puntaje actual
+	 * @return puntaje entero
+	 */
+	public int getPuntaje()
+	{
+		return Puntaje;
+	}
+	
+	/**
+	 * metodo ganar
+	 */
+	public void Win()
+	{
+		RT.toggleStop();
+		int seleccion = JOptionPane.showOptionDialog( null,"Usted ha GANADO. Consiguió "+Puntaje+" puntos \nen "+M+" minutos y "+S+" segundos.",
+				"FELICITACIONES !",JOptionPane.YES_NO_CANCEL_OPTION,
+				JOptionPane.QUESTION_MESSAGE,null,// null para icono por defecto.
+				new Object[] { "Cerrar"},"");
+		System.exit(0);				
 	}
 }

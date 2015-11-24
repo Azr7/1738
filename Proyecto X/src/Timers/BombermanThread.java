@@ -38,6 +38,7 @@ public class BombermanThread extends Thread{
 		BombermanLogica = B;
 		MiLogica = L;
 		miGUI = g;
+		start();
 	}
 	
 	public void run() {
@@ -52,9 +53,9 @@ public class BombermanThread extends Thread{
 	/**
 	 * detiene la ejecucion del hilo del bomberman
 	 */
-	public void destroy() {
-		this.interrupt();
+	public void destro() {
 		stop = true;
+		this.stop();
 	}
 
 	/**
