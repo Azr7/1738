@@ -144,7 +144,7 @@ public class GUI extends javax.swing.JFrame {
 		setTotal(MiLogica.getTablero().getCantidadObjetivos());		
 
 		datos = new JLabel();		
-		datos.setIcon(new ImageIcon("Images/Datos.png"));
+		datos.setIcon(new ImageIcon("bin/Images/Datos.png"));
 		contenedor.add(datos);
 		datos.setBounds(510,16,500,500);
 
@@ -172,7 +172,7 @@ public class GUI extends javax.swing.JFrame {
 				Mapa[i][j] = new JLabel("");
 				if(Matriz[i][j] == null) // Sabemos que si casilla es null, es irrompible
 				{
-					ImageIcon II = new ImageIcon("Images/solido.png");
+					ImageIcon II = new ImageIcon("bin/Images/solido.png");
 					Mapa[i][j].setIcon(II);
 				}
 				else if(Matriz[i][j].getPared() == null) // Si la casilla es NO NULA, puede o no tener pared
@@ -190,7 +190,7 @@ public class GUI extends javax.swing.JFrame {
 				}
 				else
 				{	// Si pared != null, entonces es un rompible, el cual puede o no tener powerup
-					ImageIcon II = new ImageIcon("Images/rompible.png");
+					ImageIcon II = new ImageIcon("bin/Images/rompible.png");
 					Mapa[i][j].setIcon(II);
 					if(Matriz[i][j].getPowerUp() != null)
 					{

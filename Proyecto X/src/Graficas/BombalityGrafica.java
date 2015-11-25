@@ -16,7 +16,7 @@ public class BombalityGrafica extends PowerUpGrafica{
 	 */
 	public BombalityGrafica() {
 			super(new JLabel());
-			super.PowerLabel.setIcon(new ImageIcon("Images/bombality.png"));
+			super.PowerLabel.setIcon(new ImageIcon("bin/Images/bombality.png"));
 		}
 }
 

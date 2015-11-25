@@ -16,7 +16,7 @@ public class SpeedUpGrafica extends PowerUpGrafica{
 	 */
 	public SpeedUpGrafica() {
 		super(new JLabel());
-		super.PowerLabel.setIcon(new ImageIcon("Images/speedup.png"));
+		super.PowerLabel.setIcon(new ImageIcon("bin/Images/speedup.png"));
 	}
 
 }

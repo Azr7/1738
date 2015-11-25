@@ -16,7 +16,7 @@ public class MasacralityGrafica extends PowerUpGrafica{
 	 */
 	public MasacralityGrafica() {
 		super(new JLabel());
-		super.PowerLabel.setIcon(new ImageIcon("Images/masacrality.png"));
+		super.PowerLabel.setIcon(new ImageIcon("bin/Images/masacrality.png"));
 	}
 
 }

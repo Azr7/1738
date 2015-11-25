@@ -79,7 +79,7 @@ public class BombaGrafica {
 			B.getBomberman().getTablero().getLogic().getGUI().add(Bomba);
 			Bomba.setBounds(x*MovPix,y*MovPix,30,30);
 			Bomba.setVisible(true);
-			Bomba.setIcon(new ImageIcon("Images/bomba1.png"));	
+			Bomba.setIcon(new ImageIcon("bin/Images/bomba1.png"));	
 	}
 	
 	public void colocarBombaGrafica2(int x,int y)
