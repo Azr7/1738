@@ -9,13 +9,13 @@ import javax.swing.JLabel;
 
 /**
  * 
- * Clase grafica de Bomberman
+ * Clase Graficas de Bomberman
  * @author Alexis Rivas & Franco Sorgato
  *
  */
 public class BombermanGrafica{
 	/**
-	 * Thread asociado a la grafica del bomberman, que controla los timers de movimiento y muerte
+	 * Thread asociado a la Graficas del bomberman, que controla los timers de movimiento y muerte
 	 */
 	protected BombermanThread BT;
 	/**
@@ -47,11 +47,11 @@ public class BombermanGrafica{
 	 */
 	protected int MovBomb = 2;
 	/**
-	 * Referencia a la GRAFICA del juego
+	 * Referencia a la Graficas del juego
 	 */
 	protected GUI miGUI;
 	/**
-	 * Tamaño de un casillero en la grafica del juego
+	 * Tamaño de un casillero en la Graficas del juego
 	 */
 	protected int MovPix = 16;
 	/**
@@ -60,7 +60,7 @@ public class BombermanGrafica{
 	protected int velocidadSleep;
 
 	/**
-	 * Crea una nueva grafica de bomberman
+	 * Crea una nueva Graficas de bomberman
 	 */
 	public BombermanGrafica()
 	{
@@ -72,8 +72,8 @@ public class BombermanGrafica{
 	}
 
 	/**
-	 * Asocia una GUI a la grafica del bomberman
-	 * @param g grafica gui
+	 * Asocia una GUI a la Graficas del bomberman
+	 * @param g Graficas gui
 	 */
 	public void setGUI(GUI g)
 	{
@@ -81,7 +81,7 @@ public class BombermanGrafica{
 	}
 	
 	/**
-	 * Setea un nuevo Thread para controlar los timers de la grafica del bomberman
+	 * Setea un nuevo Thread para controlar los timers de la Graficas del bomberman
 	 * @param bt thread bomberman
 	 */
 	public void setBT(BombermanThread bt)
@@ -89,7 +89,7 @@ public class BombermanGrafica{
 		BT = bt;
 	}
 	/**
-	 * Retorna el thread a cargo de la grafica del bomberman
+	 * Retorna el thread a cargo de la Graficas del bomberman
 	 * @return Thread BT
 	 */
 	public BombermanThread getBT()
@@ -106,7 +106,7 @@ public class BombermanGrafica{
 		velocidadSleep = vS;
 	}
 	/**
-	 * devuelve la velocidad actual del thread a cargo de la grafica
+	 * devuelve la velocidad actual del thread a cargo de la Graficas
 	 * @return int velocidad sleep
 	 */
 	public int getVelocidadSleep()
@@ -126,24 +126,24 @@ public class BombermanGrafica{
 		BombermanMuere = new ImageIcon[6];
 		
 
-		BombermanArriba[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/Arriba1.png"));
-		BombermanArriba[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/Arriba2.png"));
-		BombermanArriba[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/Arriba3.png"));
-		BombermanDerecha[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/derecha1.png"));
-		BombermanDerecha[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/derecha2.png"));
-		BombermanDerecha[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/derecha3.png"));
-		BombermanIzquierda[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/izq1.png"));
-		BombermanIzquierda[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/izq2.png"));
-		BombermanIzquierda[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/izq3.png"));
-		BombermanAbajo[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/frente2.png"));
-		BombermanAbajo[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/frente3.png"));
-		BombermanAbajo[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/frente1.png"));
-		BombermanMuere[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere1.png"));
-		BombermanMuere[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere2.png"));
-		BombermanMuere[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere3.png"));
-		BombermanMuere[3] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere4.png"));
-		BombermanMuere[4] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere5.png"));
-		BombermanMuere[5] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere6.png"));
+		BombermanArriba[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/arriba1.png"));
+		BombermanArriba[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/arriba2.png"));
+		BombermanArriba[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/arriba3.png"));
+		BombermanDerecha[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/derecha1.png"));
+		BombermanDerecha[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/derecha2.png"));
+		BombermanDerecha[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/derecha3.png"));
+		BombermanIzquierda[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/izq1.png"));
+		BombermanIzquierda[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/izq2.png"));
+		BombermanIzquierda[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/izq3.png"));
+		BombermanAbajo[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Frente2.png"));
+		BombermanAbajo[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Frente3.png"));
+		BombermanAbajo[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Frente1.png"));
+		BombermanMuere[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/muere1.png"));
+		BombermanMuere[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/muere2.png"));
+		BombermanMuere[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/muere3.png"));
+		BombermanMuere[3] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/muere4.png"));
+		BombermanMuere[4] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/muere5.png"));
+		BombermanMuere[5] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/muere6.png"));
 	}
 
 	/**

@@ -47,7 +47,7 @@ public class AltairGrafica extends EnemigoGrafica{
 		
 		//
 		
-		EnemigoMuere[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altairmuere.png"));
+		EnemigoMuere[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altairmuerto.png"));
 	}
 
 }
