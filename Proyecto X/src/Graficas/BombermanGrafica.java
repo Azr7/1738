@@ -64,7 +64,7 @@ public class BombermanGrafica{
 	 */
 	public BombermanGrafica()
 	{
-		ImageIcon BL = new ImageIcon("bin/Images/Frente1.png");
+		ImageIcon BL = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Frente1.png"));
 		BomberLabel = new JLabel();
 		BomberLabel.setIcon(BL);
 		IniImages();
@@ -126,24 +126,24 @@ public class BombermanGrafica{
 		BombermanMuere = new ImageIcon[6];
 		
 
-		BombermanArriba[0] = new ImageIcon("bin/Images/Arriba1.png");
-		BombermanArriba[1] = new ImageIcon("bin/Images/Arriba2.png");
-		BombermanArriba[2] = new ImageIcon("bin/Images/Arriba3.png");
-		BombermanDerecha[0] = new ImageIcon("bin/Images/derecha1.png");
-		BombermanDerecha[1] = new ImageIcon("bin/Images/derecha2.png");
-		BombermanDerecha[2] = new ImageIcon("bin/Images/derecha3.png");
-		BombermanIzquierda[0] = new ImageIcon("bin/Images/izq1.png");
-		BombermanIzquierda[1] = new ImageIcon("bin/Images/izq2.png");
-		BombermanIzquierda[2] = new ImageIcon("bin/Images/izq3.png");
-		BombermanAbajo[0] = new ImageIcon("bin/Images/frente2.png");
-		BombermanAbajo[1] = new ImageIcon("bin/Images/frente3.png");
-		BombermanAbajo[2] = new ImageIcon("bin/Images/frente1.png");
-		BombermanMuere[0] = new ImageIcon("bin/Images/muere1.png");
-		BombermanMuere[1] = new ImageIcon("bin/Images/muere2.png");
-		BombermanMuere[2] = new ImageIcon("bin/Images/muere3.png");
-		BombermanMuere[3] = new ImageIcon("bin/Images/muere4.png");
-		BombermanMuere[4] = new ImageIcon("bin/Images/muere5.png");
-		BombermanMuere[5] = new ImageIcon("bin/Images/muere6.png");
+		BombermanArriba[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/Arriba1.png"));
+		BombermanArriba[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/Arriba2.png"));
+		BombermanArriba[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/Arriba3.png"));
+		BombermanDerecha[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/derecha1.png"));
+		BombermanDerecha[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/derecha2.png"));
+		BombermanDerecha[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/derecha3.png"));
+		BombermanIzquierda[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/izq1.png"));
+		BombermanIzquierda[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/izq2.png"));
+		BombermanIzquierda[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/izq3.png"));
+		BombermanAbajo[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/frente2.png"));
+		BombermanAbajo[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/frente3.png"));
+		BombermanAbajo[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/frente1.png"));
+		BombermanMuere[0] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere1.png"));
+		BombermanMuere[1] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere2.png"));
+		BombermanMuere[2] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere3.png"));
+		BombermanMuere[3] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere4.png"));
+		BombermanMuere[4] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere5.png"));
+		BombermanMuere[5] = new ImageIcon(getClass().getClassLoader().getResource("Grafica/muere6.png"));
 	}
 
 	/**

@@ -18,7 +18,7 @@ public class RugulosGrafica extends EnemigoGrafica{
 	public RugulosGrafica(int i){
 		super(i);
 		super.EnemigoLabel = new JLabel();
-		super.EnemigoLabel.setIcon(new ImageIcon("bin/Images/Rugulos1.png"));
+		super.EnemigoLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos1.png")));
 		IniciarImagenes();
 	}
 	
@@ -34,28 +34,28 @@ public class RugulosGrafica extends EnemigoGrafica{
 		super.EnemigoMuere = new ImageIcon[5];
 		
 		// Arriba e Izq son iguales
-		EnemigoArriba[0] = new ImageIcon("bin/Images/Rugulos1.png");
-		EnemigoArriba[1] = new ImageIcon("bin/Images/Rugulos2.png");
-		EnemigoArriba[2] = new ImageIcon("bin/Images/Rugulos3.png");
-		EnemigoIzquierda[0] = new ImageIcon("bin/Images/Rugulos1.png");
-		EnemigoIzquierda[1] = new ImageIcon("bin/Images/Rugulos2.png");
-		EnemigoIzquierda[2] = new ImageIcon("bin/Images/Rugulos3.png");
+		EnemigoArriba[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos1.png"));
+		EnemigoArriba[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos2.png"));
+		EnemigoArriba[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos3.png"));
+		EnemigoIzquierda[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos1.png"));
+		EnemigoIzquierda[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos2.png"));
+		EnemigoIzquierda[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos3.png"));
 		
 		// Abajo y Der son iguales		
-		EnemigoAbajo[0] = new ImageIcon("bin/Images/Rugulos-1.png");
-		EnemigoAbajo[1] = new ImageIcon("bin/Images/Rugulos-2.png");
-		EnemigoAbajo[2] = new ImageIcon("bin/Images/Rugulos-3.png");
-		EnemigoDerecha[0] = new ImageIcon("bin/Images/Rugulos-1.png");
-		EnemigoDerecha[1] = new ImageIcon("bin/Images/Rugulos-2.png");
-		EnemigoDerecha[2] = new ImageIcon("bin/Images/Rugulos-3.png");
+		EnemigoAbajo[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos-1.png"));
+		EnemigoAbajo[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos-2.png"));
+		EnemigoAbajo[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos-3.png"));
+		EnemigoDerecha[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos-1.png"));
+		EnemigoDerecha[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos-2.png"));
+		EnemigoDerecha[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rugulos-3.png"));
 		
 		//
 		
-		EnemigoMuere[0] = new ImageIcon("bin/Images/Rmuere1.png");
-		EnemigoMuere[1] = new ImageIcon("bin/Images/Rmuere2.png");
-		EnemigoMuere[2] = new ImageIcon("bin/Images/Rmuere3.png");
-		EnemigoMuere[3] = new ImageIcon("bin/Images/Rmuere4.png");
-		EnemigoMuere[4] = new ImageIcon("bin/Images/Rmuere5.png");		
+		EnemigoMuere[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rmuere1.png"));
+		EnemigoMuere[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rmuere2.png"));
+		EnemigoMuere[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rmuere3.png"));
+		EnemigoMuere[3] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rmuere4.png"));
+		EnemigoMuere[4] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/Rmuere5.png"));		
 	}
 	
 }

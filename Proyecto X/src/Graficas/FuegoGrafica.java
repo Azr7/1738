@@ -22,11 +22,11 @@ public class FuegoGrafica {
 	public FuegoGrafica()
 	{
 		fuego = new ImageIcon[5];
-		fuego[0] = new ImageIcon("bin/Images/f1.png");
-		fuego[1] = new ImageIcon("bin/Images/f2.png");
-		fuego[2] = new ImageIcon("bin/Images/f3.png");
-		fuego[3] = new ImageIcon("bin/Images/f4.png");
-		fuego[4] = new ImageIcon("bin/Images/f5.png");
+		fuego[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/f1.png"));
+		fuego[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/f2.png"));
+		fuego[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/f3.png"));
+		fuego[3] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/f4.png"));
+		fuego[4] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/f5.png"));
 	}
 	
 	/**

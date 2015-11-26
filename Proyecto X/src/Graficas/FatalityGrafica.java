@@ -16,7 +16,7 @@ public class FatalityGrafica extends PowerUpGrafica{
 	 */
 	public FatalityGrafica() {
 		super(new JLabel());
-		super.PowerLabel.setIcon(new ImageIcon("bin/Images/fatality.png"));
+		super.PowerLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource("Graficas/fatality.png")));
 	}
 
 }

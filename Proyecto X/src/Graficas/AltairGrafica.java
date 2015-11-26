@@ -14,7 +14,7 @@ public class AltairGrafica extends EnemigoGrafica{
 	public AltairGrafica(int i) {
 		super(i);
 		super.EnemigoLabel = new JLabel();
-		super.EnemigoLabel.setIcon(new ImageIcon("bin/Images/altair1.png"));
+		super.EnemigoLabel.setIcon(new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair1.png")));
 		IniciarImagenes();
 	}
 	
@@ -30,24 +30,24 @@ public class AltairGrafica extends EnemigoGrafica{
 		super.EnemigoMuere = new ImageIcon[1];
 		
 		// Arriba e Izq son iguales
-		EnemigoArriba[0] = new ImageIcon("bin/Images/altair1.png");
-		EnemigoArriba[1] = new ImageIcon("bin/Images/altair2.png");
-		EnemigoArriba[2] = new ImageIcon("bin/Images/altair3.png");
-		EnemigoIzquierda[0] = new ImageIcon("bin/Images/altair1.png");
-		EnemigoIzquierda[1] = new ImageIcon("bin/Images/altair2.png");
-		EnemigoIzquierda[2] = new ImageIcon("bin/Images/altair3.png");
+		EnemigoArriba[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair1.png"));
+		EnemigoArriba[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair2.png"));
+		EnemigoArriba[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair3.png"));
+		EnemigoIzquierda[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair1.png"));
+		EnemigoIzquierda[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair2.png"));
+		EnemigoIzquierda[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair3.png"));
 		
 		// Abajo y Der son iguales		
-		EnemigoAbajo[0] = new ImageIcon("bin/Images/altair-1.png");
-		EnemigoAbajo[1] = new ImageIcon("bin/Images/altair-2.png");
-		EnemigoAbajo[2] = new ImageIcon("bin/Images/altair-3.png");
-		EnemigoDerecha[0] = new ImageIcon("bin/Images/altair-1.png");
-		EnemigoDerecha[1] = new ImageIcon("bin/Images/altair-2.png");
-		EnemigoDerecha[2] = new ImageIcon("bin/Images/altair-3.png");
+		EnemigoAbajo[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair-1.png"));
+		EnemigoAbajo[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair-2.png"));
+		EnemigoAbajo[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair-3.png"));
+		EnemigoDerecha[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair-1.png"));
+		EnemigoDerecha[1] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair-2.png"));
+		EnemigoDerecha[2] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altair-3.png"));
 		
 		//
 		
-		EnemigoMuere[0] = new ImageIcon("bin/Images/altairmuere.png");
+		EnemigoMuere[0] = new ImageIcon(getClass().getClassLoader().getResource("Graficas/altairmuere.png"));
 	}
 
 }
