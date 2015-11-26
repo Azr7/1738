@@ -149,15 +149,15 @@ public abstract class EnemigoGrafica{
 		EThread.toggleDeath();
 	}
 	/**
-	 * 
+	 * setea indice 
 	 * @param i
 	 */
 	public void setIndice(int i){
 		indice = i;
 	}
 	/**
-	 * 
-	 * @return
+	 * retorna el indice del enemigo en label de GUI
+	 * @return indice
 	 */
 	public int getIndice(){
 		return indice;

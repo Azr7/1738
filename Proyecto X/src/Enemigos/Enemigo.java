@@ -148,8 +148,8 @@ public abstract class Enemigo {
 	public void toggleVivo(){ vive = !vive;}
 	
 	/**
-	 * 
-	 * @return
+	 * chequea si está vivo
+	 * @return booleano
 	 */
 	public boolean isAlive(){return vive;}
 
